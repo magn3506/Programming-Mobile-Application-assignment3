@@ -12,9 +12,12 @@ import PostFooter from "./PostFooter";
 import PostDetails from "./PostDetails";
 
 export default function Post({
-  postData: { userImageURI, userName, postImages },
-  likeCounterState, setIsCaptionModalOpen
+  postData,
+  likeCounterState, setIsCaptionModalOpen, navigation
 }) {
+
+  const {userImageURI, userName, postImages} = postData
+
   return (
     <View style={styles.wrapper}>
       <PostHeader userDetails={{ userName, userImageURI }} />
@@ -27,7 +30,7 @@ export default function Post({
           }}
         />
       </View>
-      <PostFooter likeCounterState={likeCounterState} setIsCaptionModalOpen={setIsCaptionModalOpen} />
+      <PostFooter likeCounterState={likeCounterState} setIsCaptionModalOpen={setIsCaptionModalOpen} postData={postData} navigation={navigation} />
       <PostDetails />
     </View>
   );

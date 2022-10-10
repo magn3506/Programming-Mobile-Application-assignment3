@@ -7,7 +7,7 @@ import NavigationMenu from "../Components/NavigationMenu/NavigationMenu";
 const Contaner = styled.View`
 `
 
-export default function PostDetails({navigation}) {
+export default function CommentPage({navigation}) {
   return (
     <Contaner>
         <NavigationMenu  navigation={navigation} />

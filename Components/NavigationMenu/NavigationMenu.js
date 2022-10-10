@@ -22,10 +22,10 @@ const MicroText = styled.Text`
 export default function NavigationMenu({ navigation }) {
   return (
     <Contaner>
-      <Button title="Go to Home" onPress={() => navigation.navigate("Home")} />
+      <Button title="Go to Home" onPress={() => navigation.navigate("HomePage")} />
       <Button
         title="Go to Comments"
-        onPress={() => navigation.navigate("Comments")}
+        onPress={() => navigation.navigate("CommentPage")}
       />
     </Contaner>
   );

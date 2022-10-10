@@ -5,17 +5,17 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StyleSheet, View, Text, ScrollView } from "react-native";
 
 // ROUTES
-import Home from './routes/Home'
-import Comments from './routes/Comments'
+import HomePage from './routes/Home'
+import CommentPage from './routes/Comment'
 
 const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <NavigationContainer >
-     <Stack.Navigator initialRouteName="Comments">
-        <Stack.Screen name="Home" component={Home} />
-        <Stack.Screen name="Comments" component={Comments} />
+     <Stack.Navigator initialRouteName="HomePage">
+        <Stack.Screen name="HomePage" component={HomePage} />
+        <Stack.Screen name="CommentPage" component={CommentPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

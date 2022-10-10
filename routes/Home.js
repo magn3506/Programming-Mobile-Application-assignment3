@@ -40,7 +40,7 @@ const ButtonText = styled.Text`
   font-weight: 600;
 `;
 
-export default function Home({navigation}) {
+export default function HomePage({navigation}) {
   const [likeCounter, setLikeCounter] = useState(0);
   const [caption, setCaption] = useState(undefined);
   const [isCaptionModalOpen, setIsCaptionModalOpen] = useState(false);
@@ -98,6 +98,7 @@ export default function Home({navigation}) {
               postData={post}
               likeCounterState={{ likeCounter, setLikeCounter }}
               setIsCaptionModalOpen={setIsCaptionModalOpen}
+              navigation={navigation}
             />
           ))}
         </ScrollView>
