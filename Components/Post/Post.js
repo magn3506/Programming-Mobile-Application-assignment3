@@ -13,10 +13,11 @@ import PostDetails from "./PostDetails";
 
 export default function Post({
   postData,
-  likeCounterState, setIsCaptionModalOpen, navigation
+  likeCounterState,
+  setIsCaptionModalOpen,
+  navigation,
 }) {
-
-  const {userImageURI, userName, postImages} = postData
+  const { userImageURI, userName, postImages } = postData;
 
   return (
     <View style={styles.wrapper}>
@@ -30,8 +31,17 @@ export default function Post({
           }}
         />
       </View>
-      <PostFooter likeCounterState={likeCounterState} setIsCaptionModalOpen={setIsCaptionModalOpen} postData={postData} navigation={navigation} />
-      <PostDetails />
+      {likeCounterState && setIsCaptionModalOpen && (
+        <>
+          <PostFooter
+            likeCounterState={likeCounterState}
+            setIsCaptionModalOpen={setIsCaptionModalOpen}
+            postData={postData}
+            navigation={navigation}
+          />
+          <PostDetails />
+        </>
+      )}
     </View>
   );
 }

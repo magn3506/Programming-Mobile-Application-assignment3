@@ -11,6 +11,7 @@ import CommentPage from './routes/Comment'
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+
   return (
     <NavigationContainer >
      <Stack.Navigator initialRouteName="HomePage">
