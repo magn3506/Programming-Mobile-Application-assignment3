@@ -1,61 +1,89 @@
 import react, { useState } from "react";
-
-import {
-  View,
-  Text,
-  Pressable
-} from "react-native";
+import uuid from "react-native-uuid";
+import { View, Text, TextInput, Pressable } from "react-native";
 import styled from "styled-components/native";
 
-import NavigationMenu from "../Components/NavigationMenu/NavigationMenu";
-import Post from "../Components/Post/Post";
 // Using styled components for React-native
-const Contaner = styled.ScrollView``;
-const Comments = styled.View`
-  padding: 0px 12px;
+const CommentContainer = styled.View`
+  flex-direction: row;
+  padding: 12px;
+  align-items: center;
+  border: 1px solid lightgray;
+  justify-content: space-between;
+`;
+const CommentText = styled.Text`
+  margin-right: 12px;
+`;
+const CommentDeleteButton = styled.Pressable`
+  background-color: red;
+  padding: 3px 6px;
 `;
 
-const InputComment = styled.TextInput`
+const CommentDeleteText = styled.Text`
+  color: white;
+  font-weight: 900;
+`;
+
+const InputComment = styled.View`
   margin-top: 6px;
+  background-color: white;
+  padding: 12px;
 `;
 
-import { Data } from "../data/data";
-
-
-const Comment = ({comment}) => {
-
+// Comment subComponent
+const Comment = ({ comment, state: { setComments, comments } }) => {
   return (
-    <View>
-      <Text>{comment}</Text>
-      <Pressable><Text>Delete</Text></Pressable>
-    </View>
-  )
-}
+    <CommentContainer>
+      <CommentText>{comment.comment}</CommentText>
+      <CommentDeleteButton
+        onPress={() => {
+          // Delete slected comment by its id
+          setComments(comments.filter((obj) => obj.id !== comment.id));
+        }}
+      >
+        <CommentDeleteText>Delete</CommentDeleteText>
+      </CommentDeleteButton>
+    </CommentContainer>
+  );
+};
 
+// CommentPage
 export default function CommentPage({ navigation }) {
-  const post = Data[0];
-
   const [comments, setComments] = useState([
-    { comment: "This is a comment" },
-    { comment: "This is another comment" },
+    { id: uuid.v4(), comment: "This is a comment" },
+    { id: uuid.v4(), comment: "This is another comment" },
   ]);
 
   const [input, setInput] = useState();
- 
+
   return (
     <>
       <View>
-        {comments.map(({index, comment}) => <Comment key={index} comment={comment}/>)}
+        {comments.map((comment) => (
+          <Comment
+            key={comment.id}
+            comment={comment}
+            state={{ setComments, comments }}
+          />
+        ))}
       </View>
-      <InputComment
-        value={input}
-        onChangeText={(value) => setInput(value)}
-        onSubmitEditing={(value) => {
-          setComments([{ comment: input }, ...comments]);
-          setInput();
-        }}
-        placeholder="Add comment here..."
-      />
+      <InputComment>
+        <TextInput
+          value={input}
+          onChangeText={(value) => setInput(value)}
+          onSubmitEditing={(value) => {
+            setComments([
+              {
+                id: uuid.v4(),
+                comment: input,
+              },
+              ...comments,
+            ]);
+            setInput();
+          }}
+          placeholder="Add comment here and submit..."
+        />
+      </InputComment>
     </>
   );
 }
